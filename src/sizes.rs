@@ -830,6 +830,31 @@ mod extra_sizes {
     pub type U4627 = uint!(1 1 0 0 1 0 0 0 0 1 0 0 1);
     pub type U4896 = uint!(0 0 0 0 0 1 0 0 1 1 0 0 1);
 
+    // HQC sizes
+    //
+    // Includes n (polynomial degree), n1n2 (code dimension), and byte-aligned sizes
+    pub type U17669 = uint!(1 0 1 0 0 0 0 0 1 0 1 0 0 0 1);
+    pub type U17664 = uint!(0 0 0 0 0 0 0 0 1 0 1 0 0 0 1);
+    pub type U2209 = uint!(1 0 0 0 0 1 0 1 0 0 0 1);
+    // U2208 already defined elsewhere
+
+    pub type U35851 = uint!(1 1 0 1 0 0 0 0 0 0 1 1 0 0 0 1);
+    pub type U35840 = uint!(0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1);
+    pub type U4482 = uint!(0 1 0 0 0 0 0 1 1 0 0 0 1);
+    // U4480 already defined in ML-DSA section
+
+    pub type U57637 = uint!(1 0 1 0 0 1 0 0 1 0 0 0 0 1 1 1);
+    pub type U57600 = uint!(0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 1);
+    pub type U7205 = uint!(1 0 1 0 0 1 0 0 0 0 1 1 1);
+    pub type U7200 = uint!(0 0 0 0 0 1 0 0 0 0 1 1 1);
+
+    // HQC word count sizes (type definitions only, ArraySize impl via impl_array_sizes! below)
+    pub type U554 = uint!(0 1 0 1 0 1 0 0 0 1); // 277 * 2
+    pub type U561 = uint!(1 0 0 0 1 1 0 0 0 1); // ceil(35851 / 64)
+    pub type U1122 = uint!(0 1 0 0 0 1 1 0 0 0 1); // 561 * 2
+    pub type U901 = uint!(1 0 1 0 0 0 0 1 1 1); // ceil(57637 / 64)
+    pub type U1802 = uint!(0 1 0 1 0 0 0 0 1 1 1); // 901 * 2
+
     // SLH-DSA sizes
     pub type U7856 = uint!(0 0 0 0 1 1 0 1 0 1 1 1 1);
     pub type U16224 = uint!(0 0 0 0 0 1 1 0 1 1 1 1 1 1);
@@ -1078,6 +1103,32 @@ mod extra_sizes {
         4595 => U4595,
         4627 => U4627,
         4896 => U4896,
+    }
+
+    impl_array_sizes! {
+        hqc,
+        // HQC-1: n=17669, n1n2=17664
+        17_669 => U17669,  // n
+        17_664 => U17664,  // n1n2
+        2209 => U2209,     // ceil(n/8)
+
+        // HQC-3: n=35851, n1n2=35840
+        35_851 => U35851,  // n
+        35_840 => U35840,  // n1n2
+        4482 => U4482,     // ceil(n/8)
+
+        // HQC-5: n=57637, n1n2=57600
+        57_637 => U57637,  // n
+        57_600 => U57600,  // n1n2
+        7205 => U7205,     // ceil(n/8)
+        7200 => U7200,     // ceil(n1n2/8)
+
+        // HQC word count sizes for vector multiplication
+        554 => U554,       // 277 * 2
+        561 => U561,       // ceil(35851 / 64)
+        1122 => U1122,     // 561 * 2
+        901 => U901,       // ceil(57637 / 64)
+        1802 => U1802,     // 901 * 2
     }
 
     // SLH-DSA sizes
