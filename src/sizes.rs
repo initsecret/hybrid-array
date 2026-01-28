@@ -857,6 +857,10 @@ mod extra_sizes {
     pub type U7237 = uint!(1 0 1 0 0 0 1 0 0 0 1 1 1);
     pub type U14421 = uint!(1 0 1 0 1 0 1 0 0 0 0 1 1 1);
 
+    pub type U2321 = uint!(1 0 0 0 1 0 0 0 1 0 0 1);
+    pub type U4602 = uint!(0 1 0 1 1 1 1 1 1 0 0 0 1);
+    pub type U7333 = uint!(1 0 1 0 0 1 0 1 0 0 1 1 1);
+
     // HQC word count sizes (type definitions only, ArraySize impl via impl_array_sizes! below)
     pub type U554 = uint!(0 1 0 1 0 1 0 0 0 1); // 277 * 2
     pub type U561 = uint!(1 0 0 0 1 1 0 0 0 1); // ceil(35851 / 64)
@@ -1144,6 +1148,9 @@ mod extra_sizes {
         8978 => U8978,
         7237 => U7237,
         14421 => U14421,
+        2321 => U2321,
+        4602 => U4602,
+        7333 => U7333,
     }
 
     // SLH-DSA sizes
