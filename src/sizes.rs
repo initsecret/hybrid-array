@@ -831,42 +831,30 @@ mod extra_sizes {
     pub type U4896 = uint!(0 0 0 0 0 1 0 0 1 1 0 0 1);
 
     // HQC sizes
-    //
-    // Includes n (polynomial degree), n1n2 (code dimension), and byte-aligned sizes
-    pub type U17669 = uint!(1 0 1 0 0 0 0 0 1 0 1 0 0 0 1);
-    pub type U17664 = uint!(0 0 0 0 0 0 0 0 1 0 1 0 0 0 1);
+    pub type U554 = uint!(0 1 0 1 0 1 0 0 0 1);
+    pub type U561 = uint!(1 0 0 0 1 1 0 0 0 1);
+    pub type U901 = uint!(1 0 1 0 0 0 0 1 1 1);
+    pub type U1122 = uint!(0 1 0 0 0 1 1 0 0 0 1);
+    pub type U1802 = uint!(0 1 0 1 0 0 0 0 1 1 1);
     pub type U2209 = uint!(1 0 0 0 0 1 0 1 0 0 0 1);
-    // U2208 already defined elsewhere
-
-    pub type U35851 = uint!(1 1 0 1 0 0 0 0 0 0 1 1 0 0 0 1);
-    pub type U35840 = uint!(0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1);
-    pub type U4482 = uint!(0 1 0 0 0 0 0 1 1 0 0 0 1);
-    // U4480 already defined in ML-DSA section
-
-    pub type U57637 = uint!(1 0 1 0 0 1 0 0 1 0 0 0 0 1 1 1);
-    pub type U57600 = uint!(0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 1);
-    pub type U7205 = uint!(1 0 1 0 0 1 0 0 0 0 1 1 1);
-    pub type U7200 = uint!(0 0 0 0 0 1 0 0 0 0 1 1 1);
-
     pub type U2241 = uint!(1 0 0 0 0 0 1 1 0 0 0 1);
-    pub type U4433 = uint!(1 0 0 0 1 0 1 0 1 0 0 0 1);
-
-    pub type U4514 = uint!(0 1 0 0 0 1 0 1 1 0 0 0 1);
-    pub type U8978 = uint!(0 1 0 0 1 0 0 0 1 1 0 0 0 1);
-
-    pub type U7237 = uint!(1 0 1 0 0 0 1 0 0 0 1 1 1);
-    pub type U14421 = uint!(1 0 1 0 1 0 1 0 0 0 0 1 1 1);
-
     pub type U2321 = uint!(1 0 0 0 1 0 0 0 1 0 0 1);
+    pub type U4433 = uint!(1 0 0 0 1 0 1 0 1 0 0 0 1);
+    pub type U4482 = uint!(0 1 0 0 0 0 0 1 1 0 0 0 1);
+    pub type U4514 = uint!(0 1 0 0 0 1 0 1 1 0 0 0 1);
     pub type U4602 = uint!(0 1 0 1 1 1 1 1 1 0 0 0 1);
+    pub type U7200 = uint!(0 0 0 0 0 1 0 0 0 0 1 1 1);
+    pub type U7205 = uint!(1 0 1 0 0 1 0 0 0 0 1 1 1);
+    pub type U7237 = uint!(1 0 1 0 0 0 1 0 0 0 1 1 1);
     pub type U7333 = uint!(1 0 1 0 0 1 0 1 0 0 1 1 1);
-
-    // HQC word count sizes (type definitions only, ArraySize impl via impl_array_sizes! below)
-    pub type U554 = uint!(0 1 0 1 0 1 0 0 0 1); // 277 * 2
-    pub type U561 = uint!(1 0 0 0 1 1 0 0 0 1); // ceil(35851 / 64)
-    pub type U1122 = uint!(0 1 0 0 0 1 1 0 0 0 1); // 561 * 2
-    pub type U901 = uint!(1 0 1 0 0 0 0 1 1 1); // ceil(57637 / 64)
-    pub type U1802 = uint!(0 1 0 1 0 0 0 0 1 1 1); // 901 * 2
+    pub type U8978 = uint!(0 1 0 0 1 0 0 0 1 1 0 0 0 1);
+    pub type U14421 = uint!(1 0 1 0 1 0 1 0 0 0 0 1 1 1);
+    pub type U17664 = uint!(0 0 0 0 0 0 0 0 1 0 1 0 0 0 1);
+    pub type U17669 = uint!(1 0 1 0 0 0 0 0 1 0 1 0 0 0 1);
+    pub type U35840 = uint!(0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1);
+    pub type U35851 = uint!(1 1 0 1 0 0 0 0 0 0 1 1 0 0 0 1);
+    pub type U57600 = uint!(0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 1);
+    pub type U57637 = uint!(1 0 1 0 0 1 0 0 1 0 0 0 0 1 1 1);
 
     // SLH-DSA sizes
     pub type U7856 = uint!(0 0 0 0 1 1 0 1 0 1 1 1 1);
@@ -1118,39 +1106,33 @@ mod extra_sizes {
         4896 => U4896,
     }
 
+    // HQC sizes
     impl_array_sizes! {
         hqc,
-        // HQC-1: n=17669, n1n2=17664
-        17_669 => U17669,  // n
-        17_664 => U17664,  // n1n2
-        2209 => U2209,     // ceil(n/8)
-
-        // HQC-3: n=35851, n1n2=35840
-        35_851 => U35851,  // n
-        35_840 => U35840,  // n1n2
-        4482 => U4482,     // ceil(n/8)
-
-        // HQC-5: n=57637, n1n2=57600
-        57_637 => U57637,  // n
-        57_600 => U57600,  // n1n2
-        7205 => U7205,     // ceil(n/8)
-        7200 => U7200,     // ceil(n1n2/8)
-
-        // HQC word count sizes for vector multiplication
-        554 => U554,       // 277 * 2
-        561 => U561,       // ceil(35851 / 64)
-        1122 => U1122,     // 561 * 2
-        901 => U901,       // ceil(57637 / 64)
-        1802 => U1802,     // 901 * 2
+        554 => U554,
+        561 => U561,
+        901 => U901,
+        1122 => U1122,
+        1802 => U1802,
+        2209 => U2209,
         2241 => U2241,
-        4433 => U4433,
-        4514 => U4514,
-        8978 => U8978,
-        7237 => U7237,
-        14421 => U14421,
         2321 => U2321,
+        4433 => U4433,
+        4482 => U4482,
+        4514 => U4514,
         4602 => U4602,
+        7200 => U7200,
+        7205 => U7205,
+        7237 => U7237,
         7333 => U7333,
+        8978 => U8978,
+        14421 => U14421,
+        17664 => U17664,
+        17669 => U17669,
+        35840 => U35840,
+        35851 => U35851,
+        57600 => U57600,
+        57637 => U57637,
     }
 
     // SLH-DSA sizes
